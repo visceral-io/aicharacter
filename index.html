@@ -147,7 +147,7 @@
         /* Guidance arrow pointing down - Fixed position & moved up */
         .guide-arrow {
             position: fixed;
-            bottom: 220px; /* Moved up safely above the widget */
+            bottom: 220px; 
             right: 40px;
             background: rgba(22, 25, 32, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.03);
@@ -179,17 +179,25 @@
         /* MOBILE RESPONSIVENESS */
         @media (max-width: 800px) {
             body {
-                display: block; /* Changes from center flex to block for scrolling */
-                overflow-y: auto; /* Allows vertical scrolling */
-                padding-bottom: 150px; /* Leaves room at the bottom for the widget */
+                display: block;
+                overflow-y: auto; 
+                padding-bottom: 150px; 
             }
+
+            /* Adjust corner text specifically for mobile */
+            .corner-text {
+                top: 12px; /* Moves it much higher to the edge */
+                font-size: 0.75rem; /* Shrinks the text slightly to fit better */
+            }
+            .top-left { left: 16px; }
+            .top-right { right: 16px; }
 
             .character-view {
                 position: relative;
                 width: 100%;
-                height: 50vh; /* Takes up top half of screen */
+                height: 48vh; /* Slightly smaller height to make room */
                 left: 0;
-                margin-top: 60px; /* Clears corner text */
+                margin-top: 75px; /* Pushes Natasha further down so she doesn't overlap text */
             }
 
             .content-area {
@@ -198,17 +206,13 @@
                 right: auto;
                 top: auto;
                 transform: none;
-                margin: 20px auto 0 auto; /* Centers the content */
+                margin: 20px auto 0 auto; 
                 align-items: center;
             }
 
-            .corner-text {
-                font-size: 0.8rem;
-            }
-
             .guide-arrow {
-                bottom: 180px; /* Slightly lower on mobile but still clears widget */
-                right: 20px; /* Closer to edge on small screens */
+                bottom: 180px; 
+                right: 20px; 
             }
         }
     </style>

@@ -20,22 +20,6 @@
             position: relative;
         }
 
-        /* Minimalist Corner Headers (Low-opacity) */
-        .corner-text {
-            position: absolute;
-            top: 24px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.3); /* 30% Opacity */
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            user-select: none;
-            z-index: 5;
-        }
-
-        .top-left { left: 24px; }
-        .top-right { right: 24px; }
-
         /* Left Side Character View */
         .character-view {
             position: absolute;
@@ -144,7 +128,31 @@
             font-weight: 500;
         }
 
-        /* Guidance arrow pointing down - Fixed position & moved up */
+        /* Branding Footer */
+        .branding-footer {
+            position: absolute;
+            bottom: 24px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 40px;
+            box-sizing: border-box;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            user-select: none;
+            pointer-events: none; /* Lets clicks pass through to the widget */
+            z-index: 5;
+        }
+        
+        .branding-footer .visceral {
+            padding-right: 90px; /* Keeps the text from hiding behind the Runway widget */
+        }
+
+        /* Guidance arrow pointing down - Fixed position */
         .guide-arrow {
             position: fixed;
             bottom: 220px; 
@@ -179,25 +187,18 @@
         /* MOBILE RESPONSIVENESS */
         @media (max-width: 800px) {
             body {
-                display: block;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
                 overflow-y: auto; 
-                padding-bottom: 150px; 
             }
-
-            /* Adjust corner text specifically for mobile */
-            .corner-text {
-                top: 12px; /* Moves it much higher to the edge */
-                font-size: 0.75rem; /* Shrinks the text slightly to fit better */
-            }
-            .top-left { left: 16px; }
-            .top-right { right: 16px; }
 
             .character-view {
                 position: relative;
                 width: 100%;
-                height: 48vh; /* Slightly smaller height to make room */
+                height: 48vh;
                 left: 0;
-                margin-top: 75px; /* Pushes Natasha further down so she doesn't overlap text */
+                margin-top: 10px; /* Fixes the massive padding gap at the top */
             }
 
             .content-area {
@@ -206,7 +207,7 @@
                 right: auto;
                 top: auto;
                 transform: none;
-                margin: 20px auto 0 auto; 
+                margin: 10px auto 0 auto; 
                 align-items: center;
             }
 
@@ -214,13 +215,25 @@
                 bottom: 180px; 
                 right: 20px; 
             }
+
+            /* Moves footer to the very bottom of the scrollable page */
+            .branding-footer {
+                position: relative;
+                bottom: 0;
+                padding: 40px 20px 120px 20px; /* Extra bottom padding for the widget */
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+                font-size: 0.8rem;
+            }
+
+            .branding-footer .visceral {
+                padding-right: 0; /* Centers text normally on mobile */
+            }
         }
     </style>
 </head>
 <body>
-
-    <div class="corner-text top-left">Hike</div>
-    <div class="corner-text top-right">Powered by Visceral</div>
 
     <div class="character-view">
         <img src="avatar.png" alt="Natasha AI">
@@ -240,6 +253,11 @@
             <div class="stat-item"><span class="label">PLACE:</span> Colaba, Mumbai</div>
             <div class="stat-item"><span class="label">PERSONALITY:</span> Gen-Z, SoBo companion</div>
         </div>
+    </div>
+
+    <div class="branding-footer">
+        <span>Hike</span>
+        <span class="visceral">Powered by Visceral</span>
     </div>
 
     <div class="guide-arrow">

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Talk to Natasha</title>
     <style>
-        /* Modern, immersive dark gradient background */
+        /* Immersive dark gradient background */
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background: radial-gradient(circle at center, #1a1c24 0%, #0d0e12 100%);
@@ -18,51 +18,56 @@
             justify-content: center;
             min-height: 100vh;
             overflow: hidden;
-        }
-
-        /* Profile card layout */
-        .profile-card {
-            text-align: center;
-            background: rgba(22, 25, 32, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            padding: 40px;
-            max-width: 420px;
-            width: 90%;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 
-                        0 0 50px rgba(255, 51, 102, 0.1); /* Subtle pink glow */
-            animation: fadeIn 1s ease-out;
-        }
-
-        /* Glowing Accent Indicator */
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            background: rgba(255, 51, 102, 0.1);
-            color: #ff3366;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #ff3366;
-            border-radius: 50%;
-            margin-right: 8px;
             position: relative;
-            animation: pulse 2s infinite;
+        }
+
+        /* Minimalist Corner Headers */
+        .corner-text {
+            position: absolute;
+            top: 24px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.3); /* 30% Opacity */
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            user-select: none;
+        }
+
+        .top-left {
+            left: 24px;
+        }
+
+        .top-right {
+            right: 24px;
+        }
+
+        /* Focused layout pushed towards the bottom right near the embed */
+        .content-wrapper {
+            position: absolute;
+            bottom: 140px;
+            right: 40px;
+            max-width: 360px;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            text-align: right;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Clean Profile presentation */
+        .profile-info {
+            background: rgba(22, 25, 32, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
         }
 
         h1 {
-            font-size: 2.5rem;
-            margin: 0 0 10px 0;
+            font-size: 2rem;
+            margin: 0 0 8px 0;
             background: linear-gradient(135deg, #ffffff 0%, #a0a5b5 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -70,54 +75,39 @@
 
         p {
             color: #a0a5b5;
-            font-size: 1.05rem;
-            line-height: 1.6;
-            margin: 0 0 30px 0;
-        }
-
-        /* Hint arrow pointing down to the Runway widget */
-        .action-hint {
-            color: #ff3366;
             font-size: 0.95rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            animation: bounce 2s infinite;
+            line-height: 1.5;
+            margin: 0;
         }
 
-        /* Animations */
+        /* Animation */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 51, 102, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(255, 51, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 51, 102, 0); }
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(10px); }
-            60% { transform: translateY(5px); }
+        /* Responsive adjustment for mobile screens */
+        @media (max-width: 600px) {
+            .content-wrapper {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                align-items: center;
+                text-align: center;
+                margin-bottom: 160px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="profile-card">
-        <div class="status-badge">
-            <span class="status-dot"></span>
-            Incoming Video Call
-        </div>
-        <h1>Natasha</h1>
-        <p>Your Gen-Z, South Bombay AI companion. Turn on your microphone to talk with her in real time.</p>
-        
-        <div class="action-hint">
-            Click "Answer Call" to start ↘
+    <div class="corner-text top-left">Hike</div>
+    <div class="corner-text top-right">Powered by Visceral</div>
+
+    <div class="content-wrapper">
+        <div class="profile-info">
+            <h1>Meet Natasha</h1>
+            <p>Your Gen-Z, South Bombay AI companion. Turn on your microphone and accept the incoming video call to chat.</p>
         </div>
     </div>
 

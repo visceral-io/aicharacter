@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Talk to Natasha</title>
+    <title>Meet Natasha - Hike AI</title>
     <style>
-        /* Immersive dark gradient background */
+        /* Modern, immersive dark gradient background */
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background: radial-gradient(circle at center, #1a1c24 0%, #0d0e12 100%);
@@ -13,15 +13,14 @@
             margin: 0;
             padding: 0;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             min-height: 100vh;
             overflow: hidden;
             position: relative;
         }
 
-        /* Minimalist Corner Headers */
+        /* Minimalist Corner Headers (Low-opacity) */
         .corner-text {
             position: absolute;
             top: 24px;
@@ -33,51 +32,128 @@
             user-select: none;
         }
 
-        .top-left {
-            left: 24px;
-        }
+        .top-left { left: 24px; }
+        .top-right { right: 24px; }
 
-        .top-right {
-            right: 24px;
-        }
-
-        /* Focused layout pushed towards the bottom right near the embed */
-        .content-wrapper {
+        /* Left Side Character View */
+        .character-view {
             position: absolute;
-            bottom: 140px;
-            right: 40px;
-            max-width: 360px;
-            width: 90%;
+            left: 5%;
+            bottom: 0;
+            height: 90vh; /* Scaled full-body view */
+            width: 40vw;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            z-index: 1;
+        }
+
+        .character-view img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            opacity: 0.95;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+        }
+
+        /* Right Side Content Area */
+        .content-area {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45vw;
             display: flex;
             flex-direction: column;
-            align-items: flex-end;
-            text-align: right;
-            animation: fadeIn 0.8s ease-out;
+            gap: 40px;
+            z-index: 2;
         }
 
-        /* Clean Profile presentation */
-        .profile-info {
-            background: rgba(22, 25, 32, 0.4);
-            backdrop-filter: blur(12px);
+        /* The main info card (moved up 50px) */
+        .info-card {
+            background: rgba(22, 25, 32, 0.6);
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.03);
             border-radius: 20px;
-            padding: 24px;
+            padding: 30px;
+            width: 100%;
+            max-width: 450px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 0.8s ease-out;
+            margin-bottom: 50px; /* Moves it 50px higher than previous default */
         }
 
         h1 {
-            font-size: 2rem;
-            margin: 0 0 8px 0;
+            font-size: 2.2rem;
+            margin: 0 0 10px 0;
             background: linear-gradient(135deg, #ffffff 0%, #a0a5b5 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        p {
+        .status-header {
+            color: #ff3366;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+        }
+
+        /* New Stats Card on the right */
+        .stats-area {
+            background: rgba(22, 25, 32, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 30px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            margin-top: 50px; /* Extra spacing from main card */
+        }
+
+        .stats-area h2 {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             color: #a0a5b5;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin: 0;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .stat-item .label {
+            color: #ff3366;
+            font-weight: 500;
+        }
+
+        /* Guidance arrow at the bottom right pointing down */
+        .guide-arrow {
+            position: absolute;
+            bottom: 120px;
+            right: 40px;
+            background: rgba(22, 25, 32, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 50%;
+            padding: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            animation: bounce 2s infinite;
+            z-index: 10;
+        }
+
+        .guide-arrow svg {
+            width: 24px;
+            height: 24px;
+            fill: #ff3366;
         }
 
         /* Animation */
@@ -86,16 +162,10 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive adjustment for mobile screens */
-        @media (max-width: 600px) {
-            .content-wrapper {
-                position: relative;
-                bottom: auto;
-                right: auto;
-                align-items: center;
-                text-align: center;
-                margin-bottom: 160px;
-            }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(10px); }
+            60% { transform: translateY(5px); }
         }
     </style>
 </head>
@@ -104,11 +174,28 @@
     <div class="corner-text top-left">Hike</div>
     <div class="corner-text top-right">Powered by Visceral</div>
 
-    <div class="content-wrapper">
-        <div class="profile-info">
-            <h1>Talk to Natasha</h1>
-            <p>Turn on your microphone and accept the incoming video call to chat.</p>
+    <div class="character-view">
+        <img src="avatar.png" alt="Natasha AI">
+    </div>
+
+    <div class="content-area">
+        <div class="info-card">
+            <div class="status-header">Incoming Video Call</div>
+            <h1>Meet Natasha</h1>
+            <p>Your Gen-Z, South Bombay companion. Ask her about the best local spots.</p>
         </div>
+
+        <div class="stats-area">
+            <h2>Profile</h2>
+            <div class="stat-item"><span class="label">NAME:</span> Natasha</div>
+            <div class="stat-item"><span class="label">AGE:</span> 23</div>
+            <div class="stat-item"><span class="label">PLACE:</span> Colaba, Mumbai</div>
+            <div class="stat-item"><span class="label">PERSONALITY:</span> Gen-Z, SoBo companion</div>
+        </div>
+    </div>
+
+    <div class="guide-arrow">
+        <svg viewBox="0 0 24 24"><path d="M12 24l-8-8h6v-16h4v16h6z"/></svg>
     </div>
 
     <script src="https://cdn.dev.runwayml.com/prod/widget.js"

@@ -37,6 +37,10 @@
             border-radius: 12px;
             padding: 20px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            min-height: 400px; /* Gives the widget room to expand when loading */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>
@@ -48,8 +52,8 @@
     </header>
 
     <div class="widget-container">
-        <script src="<script src="https://cdn.jsdelivr.net/npm/@runwayml/avatars-embed" defer></script>
-        <runway-character character-id="9f4e0f58-2fc6-44e6-a9e3-997accfebc16"></runway-character>
+        <script src="https://cdn.dev.runwayml.com/prod/widget.js"
+                data-pub-key="pub_c59ace8060638b569d9cf1100ff73cb148966bbe58b045df6e06d2cca979593c"></script>
     </div>
 
 </body>

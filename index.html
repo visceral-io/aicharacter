@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meet My Runway AI Character</title>
+    <title>Talk to Natasha</title>
     <style>
-        /* A clean, modern dark-mode aesthetic */
+        /* Modern, immersive dark gradient background */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0d0e12;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: radial-gradient(circle at center, #1a1c24 0%, #0d0e12 100%);
             color: #ffffff;
             margin: 0;
             padding: 0;
@@ -17,44 +17,111 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
+            overflow: hidden;
         }
-        header {
+
+        /* Profile card layout */
+        .profile-card {
             text-align: center;
-            margin-bottom: 30px;
+            background: rgba(22, 25, 32, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 420px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 
+                        0 0 50px rgba(255, 51, 102, 0.1); /* Subtle pink glow */
+            animation: fadeIn 1s ease-out;
         }
+
+        /* Glowing Accent Indicator */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 51, 102, 0.1);
+            color: #ff3366;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #ff3366;
+            border-radius: 50%;
+            margin-right: 8px;
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+
         h1 {
-            color: #ff3366; /* Fun accent color */
-            margin-bottom: 10px;
+            font-size: 2.5rem;
+            margin: 0 0 10px 0;
+            background: linear-gradient(135deg, #ffffff 0%, #a0a5b5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
+
         p {
             color: #a0a5b5;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin: 0 0 30px 0;
         }
-        .widget-container {
-            width: 100%;
-            max-width: 500px;
-            background: #161920;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-            min-height: 400px; /* Gives the widget room to expand when loading */
+
+        /* Hint arrow pointing down to the Runway widget */
+        .action-hint {
+            color: #ff3366;
+            font-size: 0.95rem;
+            font-weight: 500;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+            gap: 8px;
+            animation: bounce 2s infinite;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 51, 102, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 51, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 51, 102, 0); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(10px); }
+            60% { transform: translateY(5px); }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Meet your AI Girlfriend</h1>
-        <p>Turn on your mic and click start to have a real-time conversation!</p>
-    </header>
-
-    <div class="widget-container">
-        <script src="https://cdn.dev.runwayml.com/prod/widget.js"
-                data-pub-key="pub_c59ace8060638b569d9cf1100ff73cb148966bbe58b045df6e06d2cca979593c"></script>
+    <div class="profile-card">
+        <div class="status-badge">
+            <span class="status-dot"></span>
+            Incoming Video Call
+        </div>
+        <h1>Natasha</h1>
+        <p>Your Gen-Z, South Bombay AI companion. Turn on your microphone to talk with her in real time.</p>
+        
+        <div class="action-hint">
+            Click "Answer Call" to start ↘
+        </div>
     </div>
 
+    <script src="https://cdn.dev.runwayml.com/prod/widget.js"
+            data-pub-key="pub_c59ace8060638b569d9cf1100ff73cb148966bbe58b045df6e06d2cca979593c"></script>
 </body>
 </html>
